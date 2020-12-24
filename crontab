@@ -1,0 +1,2 @@
+# runs a speed test and sends the results to Splunk every 5 minutes
+*/5 * * * * /Users/jrgarrigues/bin/jgspeed
