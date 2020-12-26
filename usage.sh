@@ -22,20 +22,26 @@ Help()
 
 
 while getopts ":uh" option; do
-    case $option in
-	u) # Enter bandwidth USAGE (in Gigabytes).
-		echo "$(date +%FT%T.000-08:00) Xfinity usage: $2 GB" | nc -w 1 -u 192.168.1.107 9993
-	   echo "$2 GB"
-	   exit;;
-   	h) # Print help message.
-	   Help
-   	   exit;;
-       \?) # incorrect option
-    	   echo "Error: Invalid option. Try -h instead?"
-	   exit;;
-    esac
+    	case $option in
+		u) # Enter bandwidth USAGE (in Gigabytes).
+		if [[ $2 -eq 0 ]]; then
+			USAGE=${2?Error: no Usage given}
+		fi
+		echo "$(date +%FT%T.000-08:00) Xfinity usage: $2 GB" # | nc -w 1 -u 192.168.1.107 9993
+	   	echo "$2 GB"
+	   	exit;;
+   		h) # Print help message.
+	   	Help
+   	   	exit;;
+       		\?) # incorrect option
+    	   	echo "Error: Invalid option. Try -h instead?"
+	   	exit;;
+    	esac
 done
 
 
-USAGE=${2?Error: no Usage given}
+if [ $# -eq 0 ]; then
+	USAGE=${1?Error: no Options provided}
+fi
+# USAGE=${2?Error: no Usage amount given}
 
