@@ -37,4 +37,5 @@ while getopts ":uh" option; do
 done
 
 
-echo "...done..."
+USAGE=${2?Error: no Usage given}
+
