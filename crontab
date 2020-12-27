@@ -1,2 +1,8 @@
 # runs a speed test and sends the results to Splunk every 5 minutes
-*/5 * * * * /Users/jrgarrigues/bin/jgspeed
+# */5 * * * * /Users/jrgarrigues/bin/jgspeed
+
+# changed it to run once every hour because it was chewing up too much bandwidth
+# */60 * * * * /Users/jrgarrigues/bin/jgspeed
+
+# changed it to run from a copy of my script in github
+*/60 * * * * sh -c "$(curl -fsSL https://raw.githubusercontent.com/jgarr16/bash/main/jgspeed.sh)"
