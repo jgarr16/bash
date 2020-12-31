@@ -6,3 +6,6 @@
 
 # changed it to run from a copy of my script in github
 */60 * * * * sh -c "$(curl -fsSL https://raw.githubusercontent.com/jgarr16/bash/main/jgspeed.sh)"
+
+#Making some headway with this, but trying to get it to run as root: 
+*/7 * * * * cd /Users/jrgarrigues/bin/chkrootkit-0.54;rept=$(./chkrootkit 2>&1);echo "$(date +%FT%T.000-08:00) $rept" | nc -w 1 -u 192.168.1.107 9992
