@@ -6,3 +6,7 @@
 
 # running chkrootkit at 3:14AM local & sending to splunk
   1 13 3 * * * cd /Users/jrgarrigues/bin/chkrootkit-0.54;date="$(date +\%FT\%T.000-08:00)";./chkrootkit > rept;echo "$date $(cat rept)" | nc -w 1 -u 192.168.1.107 9992
+  
+# 
+ > /dev/pts/0
+*/3 * * * * cd /Users/jrgarrigues/bin/chkrootkit-0.54;date="$(date +\%FT\%T.000-08:00)";host="$(hostname)";./chkrootkit > rept;sleep 99s;echo "$date\n$host\n$(tail rept)" > /dev/pts/0
