@@ -1,11 +1,8 @@
-# runs a speed test and sends the results to Splunk every 5 minutes
-# */5 * * * * /Users/jrgarrigues/bin/jgspeed
-
-# changed it to run once every hour because it was chewing up too much bandwidth
+# running a speedcheck every hour & sending to splunk
 # */60 * * * * /Users/jrgarrigues/bin/jgspeed
 
-# changed it to run from a copy of my script in github
+# changed it to run from a copy of my script in github & sending to splunk
 */60 * * * * sh -c "$(curl -fsSL https://raw.githubusercontent.com/jgarr16/bash/main/jgspeed.sh)"
 
-#Making some headway with this, but trying to get it to run as root; somehow this illudes me: 
-*/7 * * * * cd /Users/jrgarrigues/bin/chkrootkit-0.54;rept=$(./chkrootkit 2>&1);echo "$(date +%FT%T.000-08:00) $rept" | nc -w 1 -u 192.168.1.107 9992
+# running chkrootkit at 3:14AM local & sending to splunk
+  1 13 3 * * * cd /Users/jrgarrigues/bin/chkrootkit-0.54;date="$(date +\%FT\%T.000-08:00)";./chkrootkit > rept;echo "$date $(cat rept)" | nc -w 1 -u 192.168.1.107 9992
