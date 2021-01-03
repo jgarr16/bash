@@ -3,11 +3,3 @@
 
 # changed it to run from a copy of my script in github & sending to splunk
 */60 * * * * sh -c "$(curl -fsSL https://raw.githubusercontent.com/jgarr16/bash/main/jgspeed.sh)"
-
-# running chkrootkit at 3:14AM local & sending to splunk
-14 3 * * * cd /Users/jrgarrigues/bin/chkrootkit-0.54;date="$(date +\%FT\%T.000-08:00)";host="$(hostname);./chkrootkit > rept;printf "\n$date\n$host\n$(cat rept)" | nc -w 1 -u 192.168.1.107 9992 
-
-# running chkrootkit on CENTOS at 3:17AM local & sending to splunk
-17 3 * * * cd "/home/jrgarrigues/bin/chkrootkit-0.54;date="$(date +\%FT\%T.000-08:00)";host="$(hostname);echo $(./chkrootkit) > rept;sleep 55s;printf "\n$date\n$host\n$(cat rept)" | nc -w 1 -u 192.168.1.107 9992
-
-# > /dev/pts/0
