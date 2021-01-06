@@ -1,6 +1,6 @@
 #!/bin/zsh
 # chkrootkit - Script used to run a check for root kits and report to splunk.
-host=$(hostname);if [ "$host" == "CENTOS" ];then direct="home";else direct="Users";fi;cd "/$direct/jrgarrigues/bin/chkrootkit-0.54";date="$(date +\%FT\%T.000-08:00)";host="$(hostname)";./chkrootkit > rept;sleep 55s;printf "\n$date\n$host\n$(cat rept)" | nc -w 1 -u 192.168.1.107 9992
+host=$(hostname);if [ "$host" -eq "CENTOS" ];then direct="home";else direct="Users";fi;cd "/$direct/jrgarrigues/bin/chkrootkit-0.54";date="$(date +\%FT\%T.000-08:00)";./chkrootkit > rept;sleep 55s;printf "\n$date\n$host\n$(cat rept)" | nc -w 1 -u 192.168.1.107 9992
 
 # Depending on the type of outcome you want:
 # | nc -w 1 -u 192.168.1.107 9992
