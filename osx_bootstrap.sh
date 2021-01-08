@@ -1,5 +1,4 @@
 #!/bin/bash
-# sh -c "$(curl -fsSL https://raw.githubusercontent.com/jgarr16/bash/main/osx_bootstrap.sh)"
 
 echo "Starting bootstrap"
 
@@ -34,7 +33,7 @@ echo "Cleaning up..."
 brew cleanup
 
 echo "Installing casks..."
-brew install caskroom/cask/brew-cask
+# brew install cask
 
 CASKS=(
 #    1password
@@ -65,7 +64,7 @@ CASKS=(
 )
 
 echo "Installing cask apps..."
-brew cask install ${CASKS[@]}
+brew install --cask ${CASKS[@]}
 
 echo "Installing Python packages..."
 PYTHON_PACKAGES=(
@@ -74,6 +73,7 @@ PYTHON_PACKAGES=(
     virtualenvwrapper
 )
 
-sudo pip install $(PYTHON_PACKAGES[@]}
+sudo pip install ${PYTHON_PACKAGES[@]}
 
 echo "Bootstrap complete"
+
