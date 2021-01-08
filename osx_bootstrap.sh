@@ -1,4 +1,5 @@
 #!/bin/bash
+# sh -c "$(curl -fsSL https://raw.githubusercontent.com/jgarr16/bash/main/osx_bootstrap.sh)"
 
 echo "Starting bootstrap"
 
