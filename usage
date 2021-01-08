@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# sh -c "$(curl -fsSL https://raw.githubusercontent.com/jgarr16/bash/main/usage.sh)"
+
 # This script sends a UDP message to Splunk that includes a date/time-stamped
 # event with the current bandwith utilization for the month; thereby allowing
 # tracking and monitoring of potential usage overuns.
