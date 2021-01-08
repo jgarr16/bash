@@ -73,7 +73,7 @@ PYTHON_PACKAGES=(
     virtualenvwrapper
 )
 
-sudo pip install ${PYTHON_PACKAGES[@]}
+sudo pip3 install ${PYTHON_PACKAGES[@]}
 
 echo "Bootstrap complete"
 
