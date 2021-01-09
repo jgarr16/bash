@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# sh -c "$(curl -fsSL https://raw.githubusercontent.com/jgarr16/bash/mail/osx_bootstrap.sh)"
+
 echo "Starting bootstrap"
 
 if test ! $(which brew); then
