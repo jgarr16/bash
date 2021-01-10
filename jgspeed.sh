@@ -7,3 +7,4 @@ PATH_CENT="/home/jrgarrigues/bin/"; PATH_MAC="/usr/local/bin/"; PATH_ALP="/usr/b
 # | nc -w 1 -u 192.168.1.107 9994
 # > /dev/ttys009
 # --server 14204
+# sh -c "$(curl -  https://raw.githubusercontent.com/jgarr16/bash/main/jgspeed.sh)"
