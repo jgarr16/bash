@@ -8,3 +8,4 @@ PATH_CENT="/home/jrgarrigues/bin/"; PATH_MAC="/usr/local/bin/"; PATH_ALP="/opt/b
 # > /dev/ttys009
 # sh -c "$(curl -fsSL https://raw.githubusercontent.com/jgarr16/bash/main/jgspeed.sh)"
 # TODO: build in some fault tolerance so that when server 14204 isn't reachable, the script will wait for 30 minutes and then try again
+# TODO: build an if/then for the nc - netcat portion at the end so that Alpine uses netcat, while the others use nc
