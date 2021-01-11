@@ -4,7 +4,7 @@ PATH_CENT="/home/jrgarrigues/bin/"; PATH_MAC="/usr/local/bin/"; PATH_ALP="/usr/b
 
 
 # Depending on the type of outcome you want:
-# | nc -w 1 -u 192.168.1.107 9994
+# | netcat -w 1 -u 192.168.1.107 9994
 # > /dev/ttys009
 # sh -c "$(curl -fsSL https://raw.githubusercontent.com/jgarr16/bash/main/jgspeed.sh)"
 # TODO: build in some fault tolerance so that when server 14204 isn't reachable, the script will wait for 30 minutes and then try again
