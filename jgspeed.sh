@@ -1,5 +1,5 @@
 #!/bin/bash
-PATH_CENT="/home/jrgarrigues/bin/"; PATH_MAC="/usr/local/bin/"; PATH_ALP="/opt/bin/"; host=$(hostname); case "$host" in CENTOS|CENT*) PATH_TO_USE="$PATH_CENT";;Johns|Johns*) PATH_TO_USE="$PATH_MAC";; *) PATH_TO_USE="$PATH_ALP" ;; esac; output=$("$PATH_TO_USE"speedtest --server 14204); echo "$output" | awk '/Mbit\/s/ || /Testing from/ || /Hosted by/{print}' | nc -w1 -u 192.168.1.107 9994
+PATH_CENT="/home/jrgarrigues/bin/"; PATH_MAC="/usr/local/bin/"; PATH_ALP="/opt/bin/"; host=$(hostname); case "$host" in CENTOS|CENT*) PATH_TO_USE="$PATH_CENT";;Johns|Johns*) PATH_TO_USE="$PATH_MAC";; *) PATH_TO_USE="$PATH_ALP" ;; esac; output=$("$PATH_TO_USE"speedtest --server 14204); echo "$output" | awk '/Mbit\/s/ || /Testing from/ || /Hosted by/{print}' | netcat -w1 -u 192.168.1.107 9994
 
 
 
