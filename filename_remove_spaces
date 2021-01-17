@@ -1,0 +1,7 @@
+#!/bin/bash/ 
+
+# for MacOS, you've got to name the current directory for the find command - i.e., find . ?????
+find . -name "* *.ts" -type f -print0 | while read -d $'\0' f; do mv -v "$f" "${f// /_}";done
+
+# for other Nix environments:
+# find $1 -name "* *.ts" -type f -print0 | while read -d $'\0' f; do mv -v "$f" "${f// /_}";done
