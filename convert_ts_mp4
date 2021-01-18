@@ -1,0 +1,16 @@
+
+
+
+  for i in *.ts
+  do
+    file_num=`echo "$i" | cut -c1-2`
+    file_name=`echo "$i" | cut -d'.' -f1` 
+    printf "\n\n\nConverting $file_name\n\n\n"
+    md_title=`echo "${file_name:3}"`
+    file_name="${file_name// /_}"
+    desc_text=`gawk -F , -vFPAT='([^,]+)|("[^"]+")' '/'"${file_num}"'/ { print $2 }' 00_descriptions.csv`
+    printf "# ${md_title}\n${desc_text:1:-1}" > "${file_name}".md
+    ffmpeg -i "$i" -c:v libx264 -c:a aac "${file_name}.mp4"
+    ffmpeg -i "${file_name}.mp4" -ss 00:00:03 -frames:v 1 "${file_name}.png"
+    rm "${i}"
+  done
