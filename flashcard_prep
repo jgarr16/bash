@@ -1,0 +1,8 @@
+# 2-part script that performs OCR on images with text that I want to use for my flashcards, converts them to text, and prepares them for deployment online so I can use them on iPhone/iPad.
+
+for i in *.png;do;nm=`printf "${i:3:-4}"`;tesseract $i $nm;cat "$nm.txt" >> out.txt;echo "\n------------------\n" >> out.txt;rm $nm.txt;done
+awk '{ sub(/(\[\?\])/, "_____", $0); print $0 }' out.txt | awk '{ sub(/Identify the missing word\(?s?\)? in the following sentence\. /, "", $0); print $0 }' | awk '{ sub(/^[©oO]\)?O?o?,?\s/, "", $0); print $0 }' | perl -00pe 's/\n(?=[a-z])/ /g' | awk '/[^\s]./'> out2.txt; rm out.txt; mv out2.txt out.txt
+
+
+echo "Text 1\tText 2\tWrong Answer 1\tWrong Answer 2\tWrong Answer 3\tCategory 1\tExtra Info\t" > itil4
+for i in {1..40..1};do;VARI=`awk '/Question '"${i}"':/{flag=1; next} /------------------/{flag=0} flag' out.txt`; QUESTION=`awk 'NR==1{print $0"\t"}' <<< "${VARI}"`;ANSWER=`awk -F"* " '/^*\s/ {print $2}' <<< "${VARI}"`; WRONGLINES=`awk 'FNR == 1 {next} !/^*\s/ { print $0_}' <<< "${VARI}"`;WRONG1=`awk 'NR==1' <<< "$WRONGLINES"`;WRONG2=`awk 'NR==2' <<< "$WRONGLINES"`; WRONG3=`; awk 'NR==3' <<< "$WRONGLINES"`;echo "${QUESTION}\t${ANSWER}\t${WRONG1}\t${WRONG2}\t${WRONG3}\t\t\t" >> itil4;done
