@@ -31,7 +31,7 @@ if [ $# -eq 0 ]; then
 		USAGE=${usage_gigs?Error: Usage cannot be empty}
 		exit;
 	else
-		echo "$(date +%FT%T.000-08:00) Xfinity usage: $usage_gigs GB" | netcat -w1 -u katchi_syn 9993
+		echo "$(date +%FT%T.000-08:00) Xfinity usage: $usage_gigs GB" | nc -w1 -u katchi_syn 9993
 		echo "$usage_gigs GB"
 		exit;
 	fi
@@ -44,7 +44,7 @@ while getopts ":uh" option; do
 	if [[ $2 -eq 0 ]]; then
 		USAGE=${2?Error: no Usage given}
 	fi
-	echo "$(date +%FT%T.000-08:00) Xfinity usage: $2 GB" | netcat -w1 -u katchi_syn 9993
+	echo "$(date +%FT%T.000-08:00) Xfinity usage: $2 GB" | nc -w1 -u katchi_syn 9993
    	echo "$2 GB"
    	exit;;
 	h) # Print help message.
