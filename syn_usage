@@ -7,9 +7,10 @@
 # tracking and monitoring of potential usage overuns.
 
 # Change history:
-# 12/25/2020 - John Garrigues - original code.
-# 12/28/2020 - John Garrigues - added in the ability to read a usage value if none provided
-# 02/07/2021 - John Garrigues - changed static ip to hostname because I've got DNS on my LAN now
+# 12/25/2020 - JG - original code.
+# 12/28/2020 - JG - added in the ability to read a usage value if none provided
+# 02/07/2021 - JG - changed static ip to hostname because I've got DNS on my LAN now
+# 02/12/2021 - JG - changed the 'nc' command to 'netcat' so that it will work on the synology linux instantiation
 
 Help()
 {
@@ -31,7 +32,7 @@ if [ $# -eq 0 ]; then
 		USAGE=${usage_gigs?Error: Usage cannot be empty}
 		exit;
 	else
-		echo "$(date +%FT%T.000-08:00) Xfinity usage: $usage_gigs GB" | nc -w1 -u katchi_syn 9993
+		echo "$(date +%FT%T.000-08:00) Xfinity usage: $usage_gigs GB" | netcat -w1 -u katchi_syn 9993
 		echo "$usage_gigs GB"
 		exit;
 	fi
@@ -44,7 +45,7 @@ while getopts ":uh" option; do
 	if [[ $2 -eq 0 ]]; then
 		USAGE=${2?Error: no Usage given}
 	fi
-	echo "$(date +%FT%T.000-08:00) Xfinity usage: $2 GB" | nc -w1 -u katchi_syn 9993
+	echo "$(date +%FT%T.000-08:00) Xfinity usage: $2 GB" | netcat -w1 -u katchi_syn 9993
    	echo "$2 GB"
    	exit;;
 	h) # Print help message.
