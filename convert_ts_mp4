@@ -1,5 +1,43 @@
+# run this in two stages
+# first part is for renaming .ts files even if they're in a directory with .mp4 files
+
+ts_ttl=0
+ts_start=0
+mp4_count=0
+mp4_ttl=0
+if [[ $(find . -iname '*.mp4' | wc -l) -gt 0 ]]
+then
+    for i in *.mp4
+      do
+        mp4_ttl=$((mp4_ttl+1))
+        file_name=`echo "$i" | cut -d'.' -f1`
+        if [[ ${file_name} =~ ^[0-9] ]]; 
+        then
+          # echo "${file_name:0:3}"
+          continue 2
+        else
+          mp4_count=$((mp4_count+1))
+          # echo "$file_name"
+        fi
+        # mp4_count=$((mp4_count+1))
+      done
+fi
+ts_count=$((mp4_ttl))
+ls -tr *.ts | while read i
+  do
+    ts_ttl=$((ts_ttl+1))
+    file_name=`echo "$i" | cut -d'.' -f1`
+    ts_count="$(printf '%02d' $((ts_count+1)) )"
+    temp_name=`echo "${ts_count} ${i}"`
+    mv "$i" "$temp_name"
+  done
+# echo "MP4_Count = $mp4_count"
+# echo "MP4_Total = $mp4_ttl"
+# echo "TS_Count = $ts_count"
+# echo "TS_Total = $ts_ttl"
 
 
+# second part is for doing the conversions
 
   for i in *.ts
   do
