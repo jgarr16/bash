@@ -1,0 +1,28 @@
+#!/bin/zsh
+
+# use to download a playlist with an automated cap on the number of videos that get downloade
+# that allows you to fire & forget; just put the url into the variable definition slot
+bandwidth=$1
+url=$2
+vid_name=`echo $url | awk -F/ '{for(i=1;i<=NF;i++)if(i==NF-2)print $i}'`
+vids=$(youtube-dl --flat-playlist "${url}" | awk '/\[download\] Downloading video 1 of /{sub(/\[download\] Downloading video 1 of /, ""); print}')
+if [[ ${vids} -lt 9 ]]
+then 
+	places=1
+elif [[ ${vids} -ge 10 ]] && [[ ${vids} -lt 99 ]]
+then 
+	places=2
+elif [[ ${vids} -ge 100 ]] && [[ ${vids} -lt 1000 ]]
+then 
+	places=3
+else
+ 	places=4
+fi
+playlist_name=$(youtube-dl --no-warnings --dump-single-json "${url}" | jq -r '.title')
+echo "${vids} videos in ${url}"
+echo "folder name is ${vid_name}"
+youtube-dl -f best --limit-rate "${bandwidth}"K --no-continue --netrc --playlist-start 1 --max-downloads "${vids}" --autonumber-start 1 -o "$HOME/repos/oreilly_video/${vid_name}/%(autonumber)0${places}d_%(title)s.%(ext)s" "${url}"
+printf "${playlist_name}\n${url}" > "$HOME/repos/oreilly_video/${vid_name}/${vid_name}.txt"
+cd $HOME/repos/oreilly_video/${vid_name}/
+jgunderscore
+jgscreenshots
